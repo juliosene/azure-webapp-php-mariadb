@@ -205,7 +205,7 @@
     "subnetRefApp": "[concat(variables('vnetId'), '/subnets/App-', variables('subnetName'))]",
     "subnetRefDB": "[concat(variables('vnetId'), '/subnets/DB-', variables('subnetName'))]",
     "subnetRefGW": "[concat(variables('vnetId'), '/subnets/GatewaySubnet')]",
-    "vhdStorageName": "[concat(tolower(parameters('Project_Name')), uniqueString(resourceGroup().id))]",
+    "vhdStorageName": "[concat(tolower(substring(parameters('Project_Name'),0,3)), uniqueString(resourceGroup().id))]",
     "vhdDBStorageName": "[concat('db',variables('vhdStorageName'))]",
     "vmDBName": "[concat('DB-',parameters('Project_Name'))]",
     "WebAppName": "[concat('WebApp-',parameters('Project_Name'))]",

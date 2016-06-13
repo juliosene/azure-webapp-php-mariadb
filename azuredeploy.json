@@ -159,7 +159,7 @@
     "computeApiVersion": "2016-03-30",
     "storageApiVersion": "2015-06-15",
     "webApiVersion": "2015-08-01",
-    "artifactsPath": "https://raw.githubusercontent.com/juliosene/azure-nginx-php-mariadb-cluster/master",
+    "artifactsPath": "https://raw.githubusercontent.com/juliosene/azure-webapp-php-mariadb/master",
     "webAppDBuser": "webapp",
     "webAppDBname": "webAppDB",
     "webAppDBpass": "[substring(base64(uniqueString(resourceGroup().id, deployment().name,subscription().subscriptionId)),0,16)]",

@@ -792,17 +792,6 @@
           },
           {
             "apiVersion": "[variables('webApiVersion')]",
-            "name": "appsettings",
-            "type": "config",
-            "dependsOn": [
-              "[resourceId('Microsoft.Web/Sites', variables('dnsNameForPublicWebSite'))]"
-            ],
-            "properties": {
-              "WEBSITE_LOCAL_CACHE_OPTION": "Always"
-            }
-          },
-          {
-            "apiVersion": "[variables('webApiVersion')]",
             "name": "[variables('virtualNetworkName')]",
             "type": "virtualNetworkConnections",
             "location": "[resourceGroup().location]",

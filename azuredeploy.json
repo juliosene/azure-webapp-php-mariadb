@@ -121,14 +121,14 @@
         }
       },
       "mySQLrootPassword": {
-        "type": "string",
+        "type": "securestring",
         "defaultValue": "",
         "metadata": {
           "description": "Password to MariaDB root access"
         }
       },
       "mySQLuserPassword": {
-        "type": "string",
+        "type": "securestring",
         "defaultValue": "",
         "metadata": {
           "description": "Password to MariaDB user access. Remember this password to install your application."

@@ -58,10 +58,9 @@
       "webAppSvcPlanSku": {
         "type": "string",
         "allowedValues": [
-          "Free",
-          "Shared",
           "Basic",
-          "Standard"
+          "Standard",
+          "Premium"
         ],
         "defaultValue": "Basic",
         "metadata": {

@@ -5,12 +5,13 @@
 #
 NNODES=${1-1}
 MYSQLPASSWORD=${2:-""}
+USERPASSWORD=${4:-$MYSQLPASSWORD}
 IPPREFIX=${3:-"10.0.0."}
-DEBPASSWORD=${4:-`date +%D%A%B | md5sum| sha256sum | base64| fold -w16| head -n1`}
+DEBPASSWORD=${5:-`date +%D%A%B | md5sum| sha256sum | base64| fold -w16| head -n1`}
 IPLIST=`echo ""`
 MYIP=`ip route get ${IPPREFIX}70 | awk 'NR==1 {print $NF}'`
 MYNAME=`echo "Node$MYIP" | sed 's/$IPPREFIX.1/-/'`
-CNAME=${4:-"GaleraCluster"}
+CNAME=${6:-"GaleraCluster"}
 FIRSTNODE=`echo "${IPPREFIX}$(( $NNODES + 9 ))"`
 
 for (( n=1; n<=$NNODES; n++ ))
@@ -51,6 +52,11 @@ sed -i "s/#PASSWORD#/$DEBPASSWORD/g" debian.cnf
 mv debian.cnf /etc/mysql/
 
 mysql -u root <<EOF
+CREATE DATABASE webappdb;
+GRANT ALL PRIVILEGES ON webappdb.* TO 'webappuser'@'%'
+IDENTIFIED BY '$USERPASSWORD';
+FLUSH PRIVILEGES;
+
 GRANT ALL PRIVILEGES on *.* TO 'debian-sys-maint'@'localhost' IDENTIFIED BY '$DEBPASSWORD' WITH GRANT OPTION;
 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('$MYSQLPASSWORD');
 CREATE USER 'root'@'%' IDENTIFIED BY '$MYSQLPASSWORD';

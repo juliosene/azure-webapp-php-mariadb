@@ -130,7 +130,7 @@
         "type": "securestring",
         "defaultValue": "",
         "metadata": {
-          "description": "Password to MariaDB user access. Remember this password to install your application."
+          "description": "Password to MariaDB user access (DataBase: webappdb / User: webappuser). Remember this password to install your application."
         }
       },
       "nodeDBCount": {

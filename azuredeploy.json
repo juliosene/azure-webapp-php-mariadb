@@ -763,7 +763,7 @@
             ],
             "properties": {
               "use32BitWorkerProcess": false,
-              "phpVersion": "[parameters('PHPversion')",
+              "phpVersion": "[parameters('PHPversion')]",
               "alwaysOn": true,
               "defaultDocuments": [
                 "index.htm",

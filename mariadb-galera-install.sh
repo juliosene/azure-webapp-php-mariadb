@@ -37,8 +37,11 @@ DISTRO=`lsb_release -is | tr [:upper:] [:lower:]`
 # WORKER=`bc -l <<< "4*$NCORES"`
 
 apt-get install -y --fix-missing python-software-properties > /dev/null
-apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
-add-apt-repository "deb http://mirror.edatel.net.co/mariadb/repo/10.1/$DISTRO $REL main"
+apt-get install software-properties-common 
+#apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db 
+apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
+add-apt-repository 'deb http://ftp.osuosl.org/pub/mariadb/repo/10.1/$DISTRO $REL main'
+# add-apt-repository "deb http://mirror.edatel.net.co/mariadb/repo/10.1/$DISTRO $REL main"
 
 apt-get update > /dev/null
 

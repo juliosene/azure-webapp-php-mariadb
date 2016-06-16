@@ -107,7 +107,7 @@
         "defaultValue": "14.04.4-LTS",
         "allowedValues": [
           "14.04.4-LTS",
-          "15.10"
+          "16.04.0-LTS"
         ],
         "metadata": {
           "description": "The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version and install Ngnx web server with PHP. Allowed values: 12.04.5-LTS, 14.04.2-LTS, 15.04."

@@ -45,8 +45,11 @@ add-apt-repository "deb http://ftp.osuosl.org/pub/mariadb/repo/10.1/$DISTRO $REL
 
 apt-get update > /dev/null
 
+echo "Installing MariaDB Custer for $NNODES on $DISTRO $REL ..."
+
 DEBIAN_FRONTEND=noninteractive apt-get install -y rsync mariadb-server
 
+echo "Configuring MariaDB Cluster"
 # Remplace Debian maintenance config file
 
 wget https://raw.githubusercontent.com/juliosene/azure-nginx-php-mariadb-cluster/master/files/debian.cnf > /dev/null
@@ -111,3 +114,4 @@ fi
 # service mysql stop
 # 2 - start as a new node
 # service mysql start --wsrep_cluster_address=gcomm://10.0.0.10
+echo "MariaDB Cluster instalation finished"

@@ -29,6 +29,7 @@
       },
       "Project_Name": {
         "type": "string",
+        "defaultValue": "WebAppPHP",
         "metadata": {
           "description": "(Short) Name for WebApp and Virtual Machine."
         }

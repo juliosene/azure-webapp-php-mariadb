@@ -87,8 +87,7 @@ wget https://raw.githubusercontent.com/juliosene/azure-nginx-php-mariadb-cluster
 
 if [ "$FIRSTNODE" = "$MYIP" ];
 then
-   IPLIST=""
-   sed -i "s/#wsrep_on=ON/wsrep_on=ON/g;s/IPLIST/$IPLIST/g;s/MYIP/$MYIP/g;s/MYNAME/$MYNAME/g;s/CLUSTERNAME/$CNAME/g" cluster.cnf
+   sed -i "s/#wsrep_on=ON/wsrep_on=ON/g;s/IPLIST//g;s/MYIP/$MYIP/g;s/MYNAME/$MYNAME/g;s/CLUSTERNAME/$CNAME/g" cluster.cnf
 else
    sed -i "s/#wsrep_on=ON/wsrep_on=ON/g;s/IPLIST/$IPLIST/g;s/MYIP/$MYIP/g;s/MYNAME/$MYNAME/g;s/CLUSTERNAME/$CNAME/g" cluster.cnf
 fi
@@ -107,6 +106,7 @@ sed -i "s,/var/lib/mysql,/datadisks/disk1/data/mysql,g" /etc/mysql/my.cnf
 if [ "$FIRSTNODE" = "$MYIP" ];
 then
     service mysql start --wsrep-new-cluster > /dev/null
+    sed -i "s;gcomm://;gcomm://$IPLIST;g" /etc/mysql/conf.d/cluster.cnf
 else
     service mysql start > /dev/null
 fi

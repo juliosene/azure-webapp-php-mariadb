@@ -85,7 +85,14 @@ service mysql stop
 
 wget https://raw.githubusercontent.com/juliosene/azure-nginx-php-mariadb-cluster/master/files/cluster.cnf > /dev/null
 
-sed -i "s/#wsrep_on=ON/wsrep_on=ON/g;s/IPLIST/$IPLIST/g;s/MYIP/$MYIP/g;s/MYNAME/$MYNAME/g;s/CLUSTERNAME/$CNAME/g" cluster.cnf
+if [ "$FIRSTNODE" = "$MYIP" ];
+then
+   IPLIST=""
+   sed -i "s/#wsrep_on=ON/wsrep_on=ON/g;s/IPLIST/$IPLIST/g;s/MYIP/$MYIP/g;s/MYNAME/$MYNAME/g;s/CLUSTERNAME/$CNAME/g" cluster.cnf
+else
+   sed -i "s/#wsrep_on=ON/wsrep_on=ON/g;s/IPLIST/$IPLIST/g;s/MYIP/$MYIP/g;s/MYNAME/$MYNAME/g;s/CLUSTERNAME/$CNAME/g" cluster.cnf
+fi
+
 mv cluster.cnf /etc/mysql/conf.d/
 
 # Create a raid 

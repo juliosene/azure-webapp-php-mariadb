@@ -54,18 +54,6 @@
           "description": "Name of AppSvc Plan."
         }
       },
-      "webAppSvcPlanSku": {
-        "type": "string",
-        "allowedValues": [
-          "Basic",
-          "Standard",
-          "Premium"
-        ],
-        "defaultValue": "Basic",
-        "metadata": {
-          "description": "App Svc Plan SKU."
-        }
-      },
       "sku": {
         "type": "string",
         "allowedValues": [

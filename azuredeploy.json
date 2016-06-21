@@ -17,227 +17,266 @@
       }
     },
     "PHPversion": {
-        "type": "string",
-        "allowedValues": [
-          "5.6",
-          "7.0"
-        ],
+      "type": "string",
+      "allowedValues": [
+        "5.6",
+        "7.0"
+      ],
       "defaultValue": "5.6",
       "metadata": {
         "description": "PHP version to run your app."
       }
-      },
-      "Project_Name": {
-        "type": "string",
-        "defaultValue": "WebAppPHP",
-        "metadata": {
-          "description": "(Short) Name for WebApp and Virtual Machine."
-        }
-      },
-      "workerSize": {
-        "type": "string",
-        "allowedValues": [
-          "0",
-          "1",
-          "2"
-        ],
-        "defaultValue": "0",
-        "metadata": {
-          "description": "The instance size of the hosting plan (small, medium, or large)."
-        }
-      },
-      "webAppSvcPlanName": {
-        "type": "string",
-        "minLength": 1,
-        "defaultValue": "AppSvcPlan",
-        "metadata": {
-          "description": "Name of AppSvc Plan."
-        }
-      },
-      "sku": {
-        "type": "string",
-        "allowedValues": [
-          "S1",
-          "S2",
-          "S3",
-          "P1",
-          "P2",
-          "P3",
-          "P4"
-        ],
-        "defaultValue": "S1",
-        "metadata": {
-          "description": "The pricing tier for the hosting plan."
-        }
-      },
-      "adminUsername": {
-        "type": "string",
-        "minLength": 1,
-        "metadata": {
-          "description": "User name for the Virtual Machine."
-        }
-      },
-      "adminPassword": {
-        "type": "securestring",
-        "metadata": {
-          "description": "Password for the Virtual Machine."
-        }
-      },
-      "dnsNameForPublicWebSite": {
-        "type": "string",
-        "minLength": 1,
-        "metadata": {
-          "description": "Globally unique DNS Name for the Public Web Site (webapp) used to create a URL."
-        }
-      },
-      "ubuntuOSVersion": {
-        "type": "string",
-        "defaultValue": "14.04.4-LTS",
-        "allowedValues": [
-          "14.04.4-LTS",
-          "16.04.0-LTS"
-        ],
-        "metadata": {
-          "description": "The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version and install Ngnx web server with PHP. Allowed values: 12.04.5-LTS, 14.04.2-LTS, 15.04."
-        }
-      },
-      "mySQLrootPassword": {
-        "type": "securestring",
-        "defaultValue": "",
-        "metadata": {
-          "description": "Password to MariaDB root access"
-        }
-      },
-      "mySQLuserPassword": {
-        "type": "securestring",
-        "defaultValue": "",
-        "metadata": {
-          "description": "Password to MariaDB user access (DataBase: webappdb / User: webappuser). Remember this password to install your application."
-        }
-      },
-      "nodeDBCount": {
-        "type": "int",
-        "defaultValue": 2,
-        "allowedValues": [
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
-        "metadata": {
-          "description": "Number of Virtual Machines for MariaDB."
-        }
-      },
-      "vmDBSize": {
-        "type": "string",
-        "defaultValue": "Standard_D1_V2",
-        "allowedValues": [
-          "Standard_A0",
-          "Standard_A1",
-          "Standard_A2",
-          "Standard_A3",
-          "Standard_A4",
-          "Standard_A5",
-          "Standard_A6",
-          "Standard_A7",
-          "Standard_A8",
-          "Standard_A9",
-          "Standard_A10",
-          "Standard_A11",
-          "Standard_D1_V2",
-          "Standard_D2_V2",
-          "Standard_D3_V2",
-          "Standard_D4_V2",
-          "Standard_D5_V2",
-          "Standard_D11_V2",
-          "Standard_D12_V2",
-          "Standard_D13_V2",
-          "Standard_D14_V2",
-          "Standard_D1",
-          "Standard_D2",
-          "Standard_D3",
-          "Standard_D4",
-          "Standard_D11",
-          "Standard_D12",
-          "Standard_D13",
-          "Standard_D14"
-        ],
-        "metadata": {
-          "description": "The size of each MariaDB front end VM."
-        }
+    },
+    "Project_Name": {
+      "type": "string",
+      "defaultValue": "WebAppPHP",
+      "metadata": {
+        "description": "(Short) Name for WebApp and Virtual Machine."
       }
     },
-    "variables": {
-      "subnetIPBase": "10.11.0.",
-
-      "computeApiVersion": "2016-03-30",
-      "storageApiVersion": "2015-06-15",
-      "webApiVersion": "2015-08-01",
-      "artifactsPath": "https://raw.githubusercontent.com/juliosene/azure-webapp-php-mariadb/master",
-      "webAppDBuser": "webappuser",
-      "webAppDBname": "webappdb",
-      "webAppDBpass": "[parameters('mySQLuserPassword')]",
-
-      "AppServicePlanName": "[concat(parameters('Project_Name'),'-AppServ')]",
-
-      "hostingPlanName": "[concat('hostingplan', uniqueString(resourceGroup().id))]",
-      "webSiteName": "[concat('webSite', uniqueString(resourceGroup().id))]",
-
-      "customScriptCommandToExecuteDB": "bash mariadb-galera-install.sh",
-      "customScriptFilePathDB": "[concat(variables('artifactsPath'), '/mariadb-galera-install.sh')]",
-
-      "dnsNameForPublicWebSite": "[tolower(parameters('dnsNameForPublicWebSite'))]",
-      "dnsNameForMariaDB": "[concat('db', variables('dnsNameForPublicWebSite'))]",
-
-      "imagePublisher": "Canonical",
-      "imageOffer": "UbuntuServer",
-      "OSDiskName": "osdiskforlinuxsimple",
-      "DataDiskName": "datakisklinux",
-      "nicName": "[concat('App-', parameters('Project_Name'),'-Nic')]",
-      "nicNameDB": "[concat('DB-', parameters('Project_Name'),'-Nic')]",
-      "subnetName": "Subnet",
-
-      "addressPrefix": "[concat(variables('subnetIPBase'),'0/24')]",
-      "subnetPrefix": "[concat(variables('subnetIPBase'),'0/26')]",
-      "subnetPrefix1": "[concat(variables('subnetIPBase'),'64/26')]",
-      "subnetPrefix2": "[concat(variables('subnetIPBase'),'128/26')]",
-      "subnetPrefix3": "[concat(variables('subnetIPBase'),'192/26')]",
-      "vhdStorageType": "Standard_LRS",
-      "vhdStorageContainerName": "osvhds",
-      "availabilitySetName": "[concat('App-', parameters('Project_Name'), '-AvSet')]",
-      "availabilitySetNameDB": "[concat('DB-', parameters('Project_Name'), '-AvSet')]",
-      "nsgName": "[concat('App-', parameters('Project_Name'),'-NSG')]",
-      "nsgNameDB": "[concat('DB-', parameters('Project_Name'),'-NSG')]",
-      "lbName": "[concat('App-', parameters('Project_Name'),'-LB')]",
-      "lbNameDB": "[concat('DB-',parameters('Project_Name'),'-LB')]",
-      "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('lbName'))]",
-      "lbDBID": "[resourceId('Microsoft.Network/loadBalancers',variables('lbNameDB'))]",
-      "virtualNetworkName": "[concat(parameters('Project_Name'),'-VNet')]",
-      "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
-      "gwName": "[concat('GW-',variables('virtualNetworkName'))]",
-      "gwIPName": "[concat('IP-',variables('virtualNetworkName'))]",
-      "subnetRefApp": "[concat(variables('vnetId'), '/subnets/App-', variables('subnetName'))]",
-      "subnetRefDB": "[concat(variables('vnetId'), '/subnets/DB-', variables('subnetName'))]",
-      "subnetRefGW": "[concat(variables('vnetId'), '/subnets/GatewaySubnet')]",
-      "vhdStorageName": "[concat(tolower(substring(parameters('Project_Name'),0,3)), uniqueString(resourceGroup().id))]",
-      "vhdDBStorageName": "[concat('db',variables('vhdStorageName'))]",
-      "vmDBName": "[concat('DB-',parameters('Project_Name'))]",
-      "WebAppName": "[concat('WebApp-',parameters('Project_Name'))]",
-      "jobCollectionName": "[concat('JobCollection-',parameters('Project_Name'))]",
-      "urlWordpress": "https://github.com/WordPress/WordPress.git",
-      "urlJoomla": "https://github.com/joomla/joomla-cms.git",
-      "urlMoodle": "https://github.com/moodle/moodle.git",
-      "urlMagento": "https://github.com/magento/magento2.git",
-      "urlNothing": "https://github.com/juliosene/donothing.git",
-      "repoUrl": "[variables(concat('url', parameters('AppToInstall')))]",
-      "branch": "master",
-
-      "storageAccountId": "[concat(resourceGroup().id,'/providers/Microsoft.Storage/storageAccounts/', variables('vhdDBStorageName'))]",
-
-      "sshIPConfigName": "[concat(variables('dnsNameForMariaDB'), '-sshIPCfg')]",
-      "sshIPConfig": "[concat(variables('lbID'),'/frontendIPConfigurations/',variables('sshIPConfigName'))]"
+    "Minimum_Web_Instances": {
+      "type": "string",
+      "allowedValues": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "defaultValue": "1",
+      "metadata": {
+        "description": "Minimum number of instances running on Web App."
+      }
     },
+    "Maximum_Web_Instances": {
+      "type": "string",
+      "allowedValues": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "defaultValue": "1",
+      "metadata": {
+        "description": "Maximum number of instances running on Web App."
+      }
+    },
+    "workerSize": {
+      "type": "string",
+      "allowedValues": [
+        "0",
+        "1",
+        "2"
+      ],
+      "defaultValue": "0",
+      "metadata": {
+        "description": "The instance size of the hosting plan (small, medium, or large)."
+      }
+    },
+    "webAppSvcPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "AppSvcPlan",
+      "metadata": {
+        "description": "Name of AppSvc Plan."
+      }
+    },
+    "sku": {
+      "type": "string",
+      "allowedValues": [
+        "S1",
+        "S2",
+        "S3",
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ],
+      "defaultValue": "S1",
+      "metadata": {
+        "description": "The pricing tier for the hosting plan."
+      }
+    },
+    "adminUsername": {
+      "type": "string",
+      "minLength": 1,
+      "metadata": {
+        "description": "User name for the Virtual Machine."
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Password for the Virtual Machine."
+      }
+    },
+    "dnsNameForPublicWebSite": {
+      "type": "string",
+      "minLength": 1,
+      "metadata": {
+        "description": "Globally unique DNS Name for the Public Web Site (webapp) used to create a URL."
+      }
+    },
+    "ubuntuOSVersion": {
+      "type": "string",
+      "defaultValue": "14.04.4-LTS",
+      "allowedValues": [
+        "14.04.4-LTS",
+        "16.04.0-LTS"
+      ],
+      "metadata": {
+        "description": "The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version and install Ngnx web server with PHP. Allowed values: 12.04.5-LTS, 14.04.2-LTS, 15.04."
+      }
+    },
+    "mySQLrootPassword": {
+      "type": "securestring",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Password to MariaDB root access"
+      }
+    },
+    "mySQLuserPassword": {
+      "type": "securestring",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Password to MariaDB user access (DataBase: webappdb / User: webappuser). Remember this password to install your application."
+      }
+    },
+    "nodeDBCount": {
+      "type": "int",
+      "defaultValue": 2,
+      "allowedValues": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "metadata": {
+        "description": "Number of Virtual Machines for MariaDB."
+      }
+    },
+    "vmDBSize": {
+      "type": "string",
+      "defaultValue": "Standard_D1_V2",
+      "allowedValues": [
+        "Standard_A0",
+        "Standard_A1",
+        "Standard_A2",
+        "Standard_A3",
+        "Standard_A4",
+        "Standard_A5",
+        "Standard_A6",
+        "Standard_A7",
+        "Standard_A8",
+        "Standard_A9",
+        "Standard_A10",
+        "Standard_A11",
+        "Standard_D1_V2",
+        "Standard_D2_V2",
+        "Standard_D3_V2",
+        "Standard_D4_V2",
+        "Standard_D5_V2",
+        "Standard_D11_V2",
+        "Standard_D12_V2",
+        "Standard_D13_V2",
+        "Standard_D14_V2",
+        "Standard_D1",
+        "Standard_D2",
+        "Standard_D3",
+        "Standard_D4",
+        "Standard_D11",
+        "Standard_D12",
+        "Standard_D13",
+        "Standard_D14"
+      ],
+      "metadata": {
+        "description": "The size of each MariaDB front end VM."
+      }
+    }
+  },
+  "variables": {
+    "subnetIPBase": "10.11.0.",
+    "thresholdScaleUp": 80,
+    "thresholdScaleDown": 40,
+
+    "computeApiVersion": "2016-03-30",
+    "storageApiVersion": "2015-06-15",
+    "webApiVersion": "2015-08-01",
+    "InsApiVersion": "2015-04-01",
+    "artifactsPath": "https://raw.githubusercontent.com/juliosene/azure-webapp-php-mariadb/master",
+    "webAppDBuser": "webappuser",
+    "webAppDBname": "webappdb",
+    "webAppDBpass": "[parameters('mySQLuserPassword')]",
+
+    "AppServicePlanName": "[concat(parameters('Project_Name'),'-AppServ')]",
+
+    "hostingPlanName": "[concat('hostingplan', uniqueString(resourceGroup().id))]",
+    "webSiteName": "[concat('webSite', uniqueString(resourceGroup().id))]",
+
+    "customScriptCommandToExecuteDB": "bash mariadb-galera-install.sh",
+    "customScriptFilePathDB": "[concat(variables('artifactsPath'), '/mariadb-galera-install.sh')]",
+
+    "dnsNameForPublicWebSite": "[tolower(parameters('dnsNameForPublicWebSite'))]",
+    "dnsNameForMariaDB": "[concat('db', variables('dnsNameForPublicWebSite'))]",
+
+    "imagePublisher": "Canonical",
+    "imageOffer": "UbuntuServer",
+    "OSDiskName": "osdiskforlinuxsimple",
+    "DataDiskName": "datakisklinux",
+    "nicName": "[concat('App-', parameters('Project_Name'),'-Nic')]",
+    "nicNameDB": "[concat('DB-', parameters('Project_Name'),'-Nic')]",
+    "subnetName": "Subnet",
+
+    "addressPrefix": "[concat(variables('subnetIPBase'),'0/24')]",
+    "subnetPrefix": "[concat(variables('subnetIPBase'),'0/26')]",
+    "subnetPrefix1": "[concat(variables('subnetIPBase'),'64/26')]",
+    "subnetPrefix2": "[concat(variables('subnetIPBase'),'128/26')]",
+    "subnetPrefix3": "[concat(variables('subnetIPBase'),'192/26')]",
+    "vhdStorageType": "Standard_LRS",
+    "vhdStorageContainerName": "osvhds",
+    "availabilitySetName": "[concat('App-', parameters('Project_Name'), '-AvSet')]",
+    "availabilitySetNameDB": "[concat('DB-', parameters('Project_Name'), '-AvSet')]",
+    "nsgName": "[concat('App-', parameters('Project_Name'),'-NSG')]",
+    "nsgNameDB": "[concat('DB-', parameters('Project_Name'),'-NSG')]",
+    "lbName": "[concat('App-', parameters('Project_Name'),'-LB')]",
+    "lbNameDB": "[concat('DB-',parameters('Project_Name'),'-LB')]",
+    "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('lbName'))]",
+    "lbDBID": "[resourceId('Microsoft.Network/loadBalancers',variables('lbNameDB'))]",
+    "virtualNetworkName": "[concat(parameters('Project_Name'),'-VNet')]",
+    "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
+    "gwName": "[concat('GW-',variables('virtualNetworkName'))]",
+    "gwIPName": "[concat('IP-',variables('virtualNetworkName'))]",
+    "subnetRefApp": "[concat(variables('vnetId'), '/subnets/App-', variables('subnetName'))]",
+    "subnetRefDB": "[concat(variables('vnetId'), '/subnets/DB-', variables('subnetName'))]",
+    "subnetRefGW": "[concat(variables('vnetId'), '/subnets/GatewaySubnet')]",
+    "vhdStorageName": "[concat(tolower(substring(parameters('Project_Name'),0,3)), uniqueString(resourceGroup().id))]",
+    "vhdDBStorageName": "[concat('db',variables('vhdStorageName'))]",
+    "vmDBName": "[concat('DB-',parameters('Project_Name'))]",
+    "WebAppName": "[concat('WebApp-',parameters('Project_Name'))]",
+    "jobCollectionName": "[concat('JobCollection-',parameters('Project_Name'))]",
+    "urlWordpress": "https://github.com/WordPress/WordPress.git",
+    "urlJoomla": "https://github.com/joomla/joomla-cms.git",
+    "urlMoodle": "https://github.com/moodle/moodle.git",
+    "urlMagento": "https://github.com/magento/magento2.git",
+    "urlNothing": "https://github.com/juliosene/donothing.git",
+    "repoUrl": "[variables(concat('url', parameters('AppToInstall')))]",
+    "branch": "master",
+
+    "storageAccountId": "[concat(resourceGroup().id,'/providers/Microsoft.Storage/storageAccounts/', variables('vhdDBStorageName'))]",
+
+    "sshIPConfigName": "[concat(variables('dnsNameForMariaDB'), '-sshIPCfg')]",
+    "sshIPConfig": "[concat(variables('lbID'),'/frontendIPConfigurations/',variables('sshIPConfigName'))]"
+  },
     "resources": [
       {
         "type": "Microsoft.Storage/storageAccounts",
@@ -785,6 +824,81 @@
             }
           }
         ]
+      },
+      {
+        "apiVersion": "[variables('InsApiVersion')]",
+        "name": "[concat(parameters('Project_Name'),'-AutoScale')]",
+        "type": "Microsoft.Insights/autoscaleSettings",
+        "location": "[resourceGroup().location]",
+        "dependsOn": [
+          "[resourceId('Microsoft.Web/serverfarms', variables('AppServicePlanName'))]"
+        ],
+        "properties": {
+          "profiles": [
+            {
+              "name": "CPU",
+              "capacity": {
+                "minimum": "[parameters('Minimum_Web_Instances')]",
+                "maximum": "[parameters('Maximum_Web_Instances')]",
+                "default": "[parameters('Minimum_Web_Instances')]"
+              },
+              "rules": [
+                {
+                  "metricTrigger": {
+                    "metricName": "CpuPercentage",
+                    "metricNamespace": "",
+                    "metricResourceUri": "[resourceId('Microsoft.Web/serverfarms', variables('AppServicePlanName'))]",
+                    "timeGrain": "PT1M",
+                    "statistic": "Average",
+                    "timeWindow": "PT5M",
+                    "timeAggregation": "Average",
+                    "operator": "GreaterThan",
+                    "threshold": "[ variables('thresholdScaleUp') ]"
+                  },
+                  "scaleAction": {
+                    "direction": "Increase",
+                    "type": "ChangeCount",
+                    "value": "2",
+                    "cooldown": "PT5M"
+                  }
+                },
+                {
+                  "metricTrigger": {
+                    "metricName": "CpuPercentage",
+                    "metricNamespace": "",
+                    "metricResourceUri": "[resourceId('Microsoft.Web/serverfarms', variables('AppServicePlanName'))]",
+                    "timeGrain": "PT1M",
+                    "statistic": "Average",
+                    "timeWindow": "PT5M",
+                    "timeAggregation": "Average",
+                    "operator": "LessThan",
+                    "threshold": "[ variables('thresholdScaleDown') ]"
+                  },
+                  "scaleAction": {
+                    "direction": "Decrease",
+                    "type": "ChangeCount",
+                    "value": "1",
+                    "cooldown": "PT5M"
+                  }
+                }
+              ]
+            }
+          ],
+          "enabled": true,
+          "name": "[concat(parameters('Project_Name'),'-AutoScale')]",
+          "targetResourceUri": "[resourceId('Microsoft.Web/serverfarms', variables('AppServicePlanName'))]",
+          "notifications": [
+            {
+              "operation": "Scale",
+              "email": {
+                "sendToSubscriptionAdministrator": false,
+                "sendToSubscriptionCoAdministrators": false,
+                "customEmails": [ ]
+              },
+              "webhooks": null
+            }
+          ]
+        }
       }
     ]
   }

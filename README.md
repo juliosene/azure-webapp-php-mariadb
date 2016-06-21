@@ -5,14 +5,15 @@ Azure WebApp running PHP with IaaS MariaDB version 10 cluster connected by VPN (
 * APPTOINSTALL - Aplication to install: Wordpress, Joomla, Magento, Moodle or nothing (clear install)
 * PHPVERSION - version of PHP
 * PROJECT_NAME - Short name for your project. (used to named your VMs, interfaces, security groups, etc)
+* MINIMUM_WEB_INSTANCES - Minimum number of instances running on Web App.
+* MAXIMUM_WEB_INSTANCES - Minimum number of instances running on Web App.
 * WORKERSIZE - Sise of work
 * WEBAPPSVCPLANNAME - A name for your App Service Plan.
-* WEBAPPSVCPLANSKU - Web App Service Plan.
 * SKU - Web App SKU (basic instance)
 * ADMINUSERNAME - admin user name for Linux instances (ssh login)
 * ADMINPASSWORD - admin password for Linux instances (ssh login)
 * DNSNAMEFORPUBLICWEBSITE - prefix for your website url (http://thisfield.azurewebsites.net)
-* UBUNTUOSVERSION - Ubuntu version for VMs
+* UBUNTUOSVERSION - Ubuntu version for MariaDB database VMs
 * MYSQLROOTPASSWORD - Password for MariaDB root user
 * MYSQLUSERPASSWORD - Password for webappuser. This password will be used to install your app!
 * NODEDBCOUNT - Number of nodes in your MariaDB cluster (number of VMs)

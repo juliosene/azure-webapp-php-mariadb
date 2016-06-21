@@ -25,7 +25,7 @@ Azure WebApp running PHP with IaaS MariaDB version 10 cluster connected by VPN (
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
-## After deployment finished, you need to make a small adjustment to sync the VPN certificates. 
+## After deployment finished, you need to make a small adjustment to sync VPN certificates. 
 On Azure Portal (http://portal.azure.com):
 * 1 – Go to your Web App, select All Settings -> Networking -> Click here to configure (VNET Integration). Observe that certificates are not in sync. Take a note of VNET NAME (you will reconnect on the same one)
     <img src="https://raw.githubusercontent.com/juliosene/azure-webapp-php-mariadb/master/docs/VPN-step01.png"/>

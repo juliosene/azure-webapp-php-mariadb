@@ -45,7 +45,8 @@
         "6",
         "7",
         "8",
-        "9"
+        "9",
+        "10"
       ],
       "defaultValue": "1",
       "metadata": {
@@ -63,9 +64,10 @@
         "6",
         "7",
         "8",
-        "9"
+        "9",
+        "10"
       ],
-      "defaultValue": "1",
+      "defaultValue": "10",
       "metadata": {
         "description": "Maximum number of instances running on Web App."
       }

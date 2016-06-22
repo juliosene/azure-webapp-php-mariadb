@@ -9,6 +9,7 @@ Azure WebApp running PHP with IaaS MariaDB version 10 cluster connected by VPN (
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fjuliosene%2Fazure-webapp-php-mariadb%2Fmaster%2Fazuredeploy.json" target="_blank">
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
+### Database Name: webappdb  / User Name: webappuser / Password: MYSQLUSERPASSWORD (Template Parameter)
 
 ## Parameters:
 * APPTOINSTALL - Aplication to install: Wordpress, Joomla, Magento, Moodle or nothing (clear install)

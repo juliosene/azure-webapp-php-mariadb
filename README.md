@@ -1,6 +1,8 @@
 # azure-webapp-php-mariadb
 Azure WebApp running PHP with IaaS MariaDB version 10 cluster connected by VPN (database with private IP)
 
+<img src="https://raw.githubusercontent.com/juliosene/azure-webapp-php-mariadb/master/docs/WebApp-MariaDBCluster.png">
+
 ## Parameters:
 * APPTOINSTALL - Aplication to install: Wordpress, Joomla, Magento, Moodle or nothing (clear install)
 * PHPVERSION - version of PHP

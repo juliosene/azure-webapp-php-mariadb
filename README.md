@@ -3,6 +3,13 @@ Azure WebApp running PHP with IaaS MariaDB version 10 cluster connected by VPN (
 
 <img src="https://raw.githubusercontent.com/juliosene/azure-webapp-php-mariadb/master/docs/WebApp-MariaDBCluster.png">
 
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjuliosene%2Fazure-webapp-php-mariadb%2Fmaster%2Fazuredeploy.json" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png"/>
+</a>
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fjuliosene%2Fazure-webapp-php-mariadb%2Fmaster%2Fazuredeploy.json" target="_blank">
+    <img src="http://armviz.io/visualizebutton.png"/>
+</a>
+
 ## Parameters:
 * APPTOINSTALL - Aplication to install: Wordpress, Joomla, Magento, Moodle or nothing (clear install)
 * PHPVERSION - version of PHP
@@ -20,13 +27,6 @@ Azure WebApp running PHP with IaaS MariaDB version 10 cluster connected by VPN (
 * MYSQLUSERPASSWORD - Password for webappuser. This password will be used to install your app!
 * NODEDBCOUNT - Number of nodes in your MariaDB cluster (number of VMs)
 * VMDBSIZE - Size of VMs for individual MariaDB node.
-
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjuliosene%2Fazure-webapp-php-mariadb%2Fmaster%2Fazuredeploy.json" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png"/>
-</a>
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fjuliosene%2Fazure-webapp-php-mariadb%2Fmaster%2Fazuredeploy.json" target="_blank">
-    <img src="http://armviz.io/visualizebutton.png"/>
-</a>
 
 ## After deployment finished, you need to make a small adjustment to sync VPN certificates. 
 On Azure Portal (http://portal.azure.com):

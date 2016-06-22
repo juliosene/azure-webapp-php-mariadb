@@ -8,8 +8,7 @@
         "Nothing",
         "Wordpress",
         "Joomla",
-        "Moodle",
-        "Magento"
+        "Moodle"
       ],
       "defaultValue": "Wordpress",
       "metadata": {
@@ -270,9 +269,16 @@
     "urlJoomla": "https://github.com/joomla/joomla-cms.git",
     "urlMoodle": "https://github.com/moodle/moodle.git",
     "urlMagento": "https://github.com/magento/magento2.git",
+    "urlDrupal": "https://github.com/drupal/drupal.git",
     "urlNothing": "https://github.com/juliosene/donothing.git",
+    "branchWordpress": "master",
+    "branchJoomla": "master",
+    "branchMoodle": "master",
+    "branchMagento": "2.0",
+    "branchDrupal": "8.2.x",
+    "branchNothing": "master",
     "repoUrl": "[variables(concat('url', parameters('AppToInstall')))]",
-    "branch": "master",
+    "branch": "[variables(concat('branch', parameters('AppToInstall')))]",
 
     "storageAccountId": "[concat(resourceGroup().id,'/providers/Microsoft.Storage/storageAccounts/', variables('vhdDBStorageName'))]",
 

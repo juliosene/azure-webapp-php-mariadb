@@ -1,7 +1,7 @@
 <?php
 /*
    Plugin Name: Azure Redis to Memcached
-   Plugin URI: http://wordpress.org/extend/plugins/azure-redis/
+   Plugin URI: http://wordpress.org/extend/plugins/azure-redis-to-memcached/
    Version: 0.1
    Author: Julio Franca
    Description: Enable a web app in Azure App Service to connect to Redis Cache via the Memcache protocol. The instructions to create a Redis to Memcached connector are <a TARGET="_blank" href="https://azure.microsoft.com/en-us/documentation/articles/web-sites-connect-to-redis-using-memcache-protocol/">HERE</a>. This plugin requires W3 Total Cache.
